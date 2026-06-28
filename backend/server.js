@@ -16,8 +16,8 @@ app.post('/api/chat', async (req, res) => {
         const { message, history = [] } = req.body;
 
         const messages = [
-            //----personalización del sistema de la ia para definir su rol y estilo de respuesta
-            { role: 'system', content: 'Eres amigable y cercano. Respondes de forma natural y breve.' },
+            //----en content, se define la personalidad de respuesta de la ia
+            { role: 'system', content: '' },
             ...history,
             { role: 'user', content: message }
         ];

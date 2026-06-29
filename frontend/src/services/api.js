@@ -25,3 +25,10 @@ export async function enviarMensaje(mensaje, historial) {
     }
 }
 
+export async function clearHistory() {
+  const res = await fetch('http://localhost:4000/api/chat/history', {
+    method: 'DELETE'
+  });
+  return res.json();
+}
+

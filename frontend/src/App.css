@@ -44,3 +44,26 @@ header h1 {
   color: #fff;
   text-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
 }
+
+/* AreaInput.css */
+.input-area button[type="button"] {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: #f0f0f0;
+  border: none;
+  font-size: 1.2rem;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.input-area button[type="button"]:hover:not(:disabled) {
+  background: #e0e0e0;
+}
+
+.input-area button.listening {
+  background: #ff4444;
+  color: white;
+  animation: pulse 1s infinite;
+}
+

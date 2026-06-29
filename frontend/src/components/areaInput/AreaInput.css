@@ -22,10 +22,11 @@
   background: #f5f5f5;
 }
 
-.input-area button {
+/* Botón principal "Enviar" */
+.input-area button[type="submit"] {
   padding: 0.75rem 1.5rem;
   background: #0463c8;
-  color: white;
+  color: rgb(255, 255, 255);
   border: 1px solid white;
   border-radius: 2rem;
   cursor: pointer;
@@ -33,11 +34,92 @@
   transition: background 0.1s;
 }
 
-.input-area button:hover:not(:disabled) {
+.input-area button[type="submit"]:hover:not(:disabled) {
   background: #264567;
 }
 
-.input-area button:disabled {
+.input-area button[type="submit"]:disabled {
   opacity: 0.5;
   cursor: not-allowed;
+}
+
+/* ===== BOTÓN DE VOZ (circular) ===== */
+.input-area .voice-btn {
+  width: 44px;
+  height: 44px;
+  padding: 0;
+  border-radius: 50%;
+  border: 1px solid rgb(122, 76, 76);
+  background: #f2f1f4;
+  color: #34213d;
+  font-size: 1.2rem;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.2s;
+  flex-shrink: 0;
+  position: relative; /* para posicionar .wave-pair absoluto */
+}
+
+.input-area .voice-btn:hover:not(:disabled) {
+  background: #7c7882;
+  color: #c4c7c7;
+}
+
+.input-area .voice-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+/* ---- ESCUCHANDO: rojo + pulso ---- */
+.input-area .voice-btn.listening {
+  background: #ff4444 !important;
+  color: white !important;
+  animation: pulse 1s infinite;
+}
+
+@keyframes pulse {
+  0%, 100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(255,68,68,0.7); }
+  50%      { transform: scale(1.05); box-shadow: 0 0 0 8px rgba(255,68,68,0); }
+}
+
+/* ---- HABLANDO: azul + cross-fade ondas ---- */
+.input-area .voice-btn.speaking {
+  background: #007bff;
+  color: white;
+  animation: none; /* quita pulse si heredara */
+}
+
+/* Contenedor de las dos ondas superpuestas */
+.wave-pair {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  pointer-events: none;
+}
+
+/* Cada icono de onda centrado */
+.wave-icon {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  transition: opacity 0.50s ease, transform 0.35s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Animación cross-fade: wave1 entra/sale, wave2 hace lo inverso */
+.voice-btn.speaking .wave-1 {
+  animation: waveCrossFade 1.2s ease-in-out infinite;
+}
+
+@keyframes waveCrossFade {
+  0%   { opacity: 1; transform: translate(-50%, -50%) scale(1); }
+  50%  { opacity: 0; transform: translate(-50%, -50%) scale(0.85); }
+  100% { opacity: 1; transform: translate(-50%, -50%) scale(1); }
 }

@@ -8,6 +8,13 @@ import { useState, useEffect } from 'react';
 function App() {
   const { enviarMensajeHandler: enviar, loading, clear } = useChat();
   const [mensajes, setMensajes] = useState([]);
+  const [lastBotMessage, setLastBotMessage] = useState('');
+
+  // cargar voces al inicio
+  useEffect(() => {
+    speechSynthesis.getVoices();
+    speechSynthesis.onvoiceschanged = () => speechSynthesis.getVoices();
+  }, []);
 
   // Cargar historial al montar
   useEffect(() => {
@@ -22,6 +29,7 @@ function App() {
     setMensajes(prev => [...prev, userMsg]);
     const reply = await enviar(texto);
     setMensajes(prev => [...prev, { role: 'assistant', content: reply }]);
+    setLastBotMessage(reply);  // actualizar el último mensaje del bot
   };
 
   const handleClear = async () => {
@@ -63,7 +71,7 @@ function App() {
             Limpiar chat
           </button></header>
         <AreaChat mensajes={mensajes} loading={loading} />
-        <AreaInput onSend={enviarMensajeHandler} disabled={loading} />
+        <AreaInput onSend={enviarMensajeHandler} disabled={loading} lastBotMessage={lastBotMessage} />
       </div>
     </div>
   );

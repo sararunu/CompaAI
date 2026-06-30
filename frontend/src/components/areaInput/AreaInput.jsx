@@ -1,113 +1,67 @@
 import { useState, useLayoutEffect, useRef, useEffect } from 'react';
-import './AreaInput.css';
 import { speak, startListening } from '../../utils/voice';
+import './AreaInput.css';
 
-function AreaInput({ onSend, disabled, lastBotMessage }) {
-    const [texto, setTexto] = useState('');
-    const [listening, setListening] = useState(false);
-    const [speaking, setSpeaking] = useState(false);
-    // const [iconPhase, setIconPhase] = useState(0); //alterna 0-1  ← YA NO SE USA (animación CSS)
+function AreaInput({ onSend, disabled, lastBotMessage, onSpeakingChange, mood }) {
+  const [texto, setTexto] = useState('');
+  const [listening, setListening] = useState(false);
+  const inputRef = useRef(null);
+  const recognitionRef = useRef(null);
+  const moodRef = useRef(mood);
 
-    const inputRef = useRef(null); //referencia al input
-    const recognitionRef = useRef(null);
-    // const phaseTimerRef = useRef(null);  ← YA NO SE USA
+  // actualizar ref cuando mood cambia
+  useEffect(() => { moodRef.current = mood; }, [mood]);
 
-    // Foco al montar Y tras cada render (incluye tras setTexto(''))
-    // useLayoutEffect es síncrono, se ejecuta antes de pintar 
-    useLayoutEffect(() => {
-        if (!disabled) {
-            inputRef.current?.focus();
-        }
-    }, [disabled]);  // se ejecuta al montar y cuando disabled cambia
+  // autofoco
+  useLayoutEffect(() => { if (!disabled) inputRef.current?.focus(); }, [disabled]);
 
-    //hablar automáticamente el último mensaje del bot
-    // useEffect(() => {
-    //     if (lastBotMessage) speak(lastBotMessage);
-    // }, [lastBotMessage]);
-    useEffect(() => {
-        if (!lastBotMessage) return;
-        speak(lastBotMessage, 'es-ES', {
-            onStart: () => setSpeaking(true),
-            onEnd: () => { setSpeaking(false); /* setIconPhase(0); */ }
-        });
-    }, [lastBotMessage]);
+  //hablar automáticamente ---lastBotMessage como trigger
+  useEffect(() => {
+    if (!lastBotMessage) return;
+    speak(lastBotMessage, 'es-ES', {
+      onStart: () => onSpeakingChange(true),
+      onEnd: () => onSpeakingChange(false),
+      mood: moodRef.current,
+    });
+  }, [lastBotMessage, onSpeakingChange]);
 
-    // Alternar iconos mientras habla (onda) ← AHORA ES PURAMENTE CSS
-    // useEffect(() => {
-    //     if (speaking) {
-    //         phaseTimerRef.current = setInterval(() => setIconPhase(p => 1 - p), 300);
-    //     } else {
-    //         clearInterval(phaseTimerRef.current);
-    //     }
-    //     return () => clearInterval(phaseTimerRef.current);
-    // }, [speaking]);
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    if (!texto.trim() || disabled) return;
+    onSend(texto);
+    setTexto('');
+  };
 
-    const handleSubmit = (e) => {
-        e.preventDefault();
-        if (!texto.trim() || disabled) return;
-        onSend(texto);
-        setTexto('');
-    };
-
-    const toggleListen = () => {
-        if (listening) {
-            recognitionRef.current?.stop();
-            setListening(false);
-            return;
-        }
-        setListening(true);
-        recognitionRef.current = startListening(
-            (transcript) => {
-                // setTexto(transcript); //lo muestra en el input
-                setListening(false);
-                onSend(transcript); //enviar mensaje automáticamente
-            },
-            (err) => {
-                console.error('Error voz:', err);
-                setListening(false);
-            }
-        );
-    };
-
-    const Icons = {
-        idle: <i className="fa-solid fa-microphone" />,
-        listening: <i className="fa-solid fa-microphone-slash" style={{ color: '#ff4444' }} />,
-        wave1: <i className="fa-solid fa-volume-high"></i>,
-    };
-
-    return (
-        <form onSubmit={handleSubmit} className="input-area">
-            <input
-                ref={inputRef}
-                value={texto}
-                onChange={e => setTexto(e.target.value)}
-                placeholder="Escribir a Compa..."
-                disabled={disabled || listening || speaking}
-            />
-            <button type="submit" disabled={disabled || !texto.trim()}>
-                Enviar
-            </button>
-
-            <button
-                type="button"
-                onClick={toggleListen}
-                disabled={disabled || speaking}
-                className={`voice-btn ${listening ? 'listening' : ''} ${speaking ? 'speaking' : ''}`}
-                aria-label={listening ? 'Parar escucha' : speaking ? 'Hablando...' : 'Hablar'}
-            >
-                {/* Estado idle / listening: icono único */}
-                {!speaking && !listening && Icons.idle}
-                {listening && Icons.listening}
-
-                {/* Estado speaking: AMBOS iconos superpuestos para cross-fade */}
-                {speaking && (
-                    <span className="wave-pair">
-                        <span className="wave-icon wave-1">{Icons.wave1}</span>
-                    </span>
-                )}
-            </button>
-        </form>
+  const toggleListen = () => {
+    if (listening) { recognitionRef.current?.stop(); setListening(false); return; }
+    // si el user habla, parar el tts
+    window.speechSynthesis.cancel();
+    onSpeakingChange(false);
+    setListening(true);
+    recognitionRef.current = startListening(
+      (t) => { setTexto(t); setListening(false); onSend(t); setTexto(''); },
+      () => setListening(false)
     );
+  };
+
+  const Icons = {
+    idle: <i className="fa-solid fa-microphone" />,
+    listening: <i className="fa-solid fa-microphone-slash" style={{ color: '#ff4444' }} />
+  };
+
+  let btnIcon = Icons.idle;
+  let btnClass = 'voice-btn';
+  if (listening) { btnIcon = Icons.listening; btnClass += ' listening'; }
+
+  return (
+    <form onSubmit={handleSubmit} className="input-area">
+      <input ref={inputRef} value={texto} onChange={e => setTexto(e.target.value)} placeholder="Escribir a Compa..." disabled={disabled || listening} />
+      <button type="submit" disabled={disabled || !texto.trim()}>Enviar</button>
+      <button type="button" onClick={toggleListen} disabled={disabled} className={btnClass} aria-label={listening ? 'Parar escucha' : 'Hablar'}>
+        {btnIcon}
+      </button>
+    </form>
+  );
 }
 
 export default AreaInput;

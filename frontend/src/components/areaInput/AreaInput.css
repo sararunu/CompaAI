@@ -22,7 +22,6 @@
   background: #f5f5f5;
 }
 
-/* Botón principal "Enviar" */
 .input-area button[type="submit"] {
   padding: 0.75rem 1.5rem;
   background: #0463c8;
@@ -43,7 +42,6 @@
   cursor: not-allowed;
 }
 
-/* ===== BOTÓN DE VOZ (circular) ===== */
 .input-area .voice-btn {
   width: 44px;
   height: 44px;
@@ -59,12 +57,12 @@
   cursor: pointer;
   transition: all 0.2s;
   flex-shrink: 0;
-  position: relative; /* para posicionar .wave-pair absoluto */
+  position: relative;
 }
 
 .input-area .voice-btn:hover:not(:disabled) {
   background: #7c7882;
-  color: #c4c7c7;
+  color: #feffff;
 }
 
 .input-area .voice-btn:disabled {
@@ -72,7 +70,6 @@
   cursor: not-allowed;
 }
 
-/* ---- ESCUCHANDO: rojo + pulso ---- */
 .input-area .voice-btn.listening {
   background: #ff4444 !important;
   color: white !important;
@@ -84,14 +81,12 @@
   50%      { transform: scale(1.05); box-shadow: 0 0 0 8px rgba(255,68,68,0); }
 }
 
-/* ---- HABLANDO: azul + cross-fade ondas ---- */
 .input-area .voice-btn.speaking {
   background: #007bff;
   color: white;
-  animation: none; /* quita pulse si heredara */
+  animation: none;
 }
 
-/* Contenedor de las dos ondas superpuestas */
 .wave-pair {
   position: absolute;
   inset: 0;
@@ -101,7 +96,6 @@
   pointer-events: none;
 }
 
-/* Cada icono de onda centrado */
 .wave-icon {
   position: absolute;
   top: 50%;
@@ -113,7 +107,6 @@
   justify-content: center;
 }
 
-/* Animación cross-fade: wave1 entra/sale, wave2 hace lo inverso */
 .voice-btn.speaking .wave-1 {
   animation: waveCrossFade 1.2s ease-in-out infinite;
 }

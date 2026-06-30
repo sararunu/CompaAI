@@ -1,40 +1,49 @@
+import { useState, useEffect } from 'react';
 import useChat from './hooks/useChat';
 import AreaChat from './components/areaChat/AreaChat';
 import AreaInput from './components/areaInput/AreaInput';
+import Avatar from './components/Avatar/Avatar';
 import Lightfall from './components/lightfall/Lightfall';
+import { analyzeMood } from './utils/mood';
 import './App.css';
-import { useState, useEffect } from 'react';
 
 function App() {
   const { enviarMensajeHandler: enviar, loading, clear } = useChat();
   const [mensajes, setMensajes] = useState([]);
   const [lastBotMessage, setLastBotMessage] = useState('');
+  const [mood, setMood] = useState('neutral');
+  const [speaking, setSpeaking] = useState(false);
 
-  // cargar voces al inicio
+  // Cargar voces al inicio
   useEffect(() => {
     speechSynthesis.getVoices();
     speechSynthesis.onvoiceschanged = () => speechSynthesis.getVoices();
   }, []);
 
-  // Cargar historial al montar
+  // Cargar historial
   useEffect(() => {
     fetch('http://localhost:4000/api/chat/history')
       .then(r => r.json())
       .then(data => setMensajes(data));
   }, []);
 
-  // Enviar mensaje y actualizar UI local
-  const enviarMensajeHandler = async (texto) => {
+  const handleSend = async (texto) => {
+    // Para la IA si está hablando
+    speechSynthesis.cancel();
+    setSpeaking(false);
+    
+    setMood('thinking');
     const userMsg = { role: 'user', content: texto };
     setMensajes(prev => [...prev, userMsg]);
     const reply = await enviar(texto);
     setMensajes(prev => [...prev, { role: 'assistant', content: reply }]);
-    setLastBotMessage(reply);  // actualizar el último mensaje del bot
+    setLastBotMessage(reply);
+    setMood(analyzeMood(reply));
   };
 
   const handleClear = async () => {
     await clear();
-    setMensajes([]);  // limpia UI local
+    setMensajes([]);
   };
 
   return (
@@ -64,16 +73,48 @@ function App() {
         <header>
           <h1>Compa</h1>
           <button
-            onClick={handleClear}
-            disabled={loading}
-            style={{ padding: '0.5rem 1rem', fontSize: '0.85rem', marginTop: '1rem', cursor: loading ? 'not-allowed' : 'pointer' }}
+            onClick={() => {
+              if (window.confirm('¿Seguro que quieres borrar todo el historial?')) {
+                handleClear();
+              }
+            }}
+            disabled={loading || mensajes.length === 0}
+            style={{
+              color: 'white',
+              background: (loading || mensajes.length === 0) ? '#5e5c5c' : 'rgba(218, 8, 8, 0.72)',
+              padding: '0.5rem 1rem',
+              fontSize: '0.85rem',
+              marginTop: '1rem',
+              cursor: (loading || mensajes.length === 0) ? 'not-allowed' : 'pointer'
+            }}
           >
-            Limpiar chat
-          </button></header>
-        <AreaChat mensajes={mensajes} loading={loading} />
-        <AreaInput onSend={enviarMensajeHandler} disabled={loading} lastBotMessage={lastBotMessage} />
+            <i className="fa-solid fa-trash"></i>
+          </button>
+
+          {/* Avatar centrado en el medio */}
+          <div className="avatar-centered">
+            <Avatar
+              speaking={speaking}
+              thinking={loading}
+              listening={false}
+              mood={mood}
+            />
+          </div>
+        </header>
+
+        <div className="chat-area-wrapper">
+          <AreaChat mensajes={mensajes} loading={loading} />
+        </div>
+
+        <AreaInput
+          onSend={handleSend}
+          disabled={loading}
+          lastBotMessage={lastBotMessage}
+          onSpeakingChange={setSpeaking}
+          mood={mood}
+        />
       </div>
-    </div>
+    </div >
   );
 }
 

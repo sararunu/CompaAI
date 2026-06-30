@@ -67,3 +67,55 @@ header h1 {
   animation: pulse 1s infinite;
 }
 
+/* Chat area wrapper */
+.chat-area-wrapper {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  overflow-y: auto;
+}
+
+/* Avatar centrado en el medio cuando NO hay mensajes */
+.chat-area-wrapper:not(:has(.chat-area .msg)) .avatar-centered {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 100%;
+  pointer-events: none;
+  z-index: 10;
+}
+
+.chat-area-wrapper:not(:has(.chat-area .msg)) .avatar-centered canvas {
+  pointer-events: auto;
+}
+
+/* Cuando HAY mensajes, avatar arriba normal */
+.chat-area-wrapper:has(.chat-area .msg) .avatar-centered {
+  position: static;
+  transform: none;
+  margin-bottom: 1rem;
+}
+
+/* Avatar container normal */
+.avatar-centered {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.avatar-centered canvas {
+  pointer-events: auto;
+}
+
+/* Chat area */
+.chat-area {
+  flex: 1;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  padding: 1rem;
+}
+

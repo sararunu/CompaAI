@@ -34,13 +34,13 @@
 }
 
 .msg.user .burbuja {
-  background: #835dcb;
+  background: #8076dcb7;
   color: rgb(0, 0, 0);
   border-bottom-right-radius: 0.25rem;
 }
 
 .msg.assistant .burbuja {
-  background: #f1f1f1;
+  background: #f1f1f1d5;
   color: #000000;
   border-bottom-left-radius: 0.25rem;
 }

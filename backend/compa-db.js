@@ -17,11 +17,11 @@ db.exec(`
 export function loadHistory(limit = 50) {
   const stmt = db.prepare(`
     SELECT role, content FROM messages
-    ORDER BY created_at DESC
+    ORDER BY id ASC
     LIMIT ?
   `);
   const rows = stmt.all(limit);
-  return rows.reverse(); // más antiguos primero
+  return rows;
 }
 
 export function saveMessage(role, content) {

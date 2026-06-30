@@ -74,7 +74,7 @@ export default function AvatarCanvas({
             angry: { left: { curve: -0.8, yOffset: -2 }, right: { curve: 0.8, yOffset: -2 } },
             thinking: { left: { curve: -0.5, yOffset: -1 }, right: { curve: 0, yOffset: 0 } },
             confused: { left: { curve: -0.8, yOffset: -2 }, right: { curve: 0.5, yOffset: 1 } },
-            excited: { left: { curve: -1.2, yOffset: -3 }, right: { curve: -1.2, yOffset: -3 } },
+            excited: { left: { curve: 1, yOffset: 2 }, right: { curve: -1, yOffset: 2 } },
             neutral: { left: { curve: 0, yOffset: 0 }, right: { curve: 0, yOffset: 0 } }
         };
 
@@ -97,13 +97,21 @@ export default function AvatarCanvas({
             ctx.save();
             ctx.translate(cx, cy);
 
+            // colores moods
+            const faceColors = {
+                angry: { start: '#c0392b', end: '#8b0000' },
+                sad: { start: '#306d95', end: '#1a5276' },
+                excited: { start: '#752d70', end: '#7d226d' },
+            };
+            const faceColor = faceColors[mood] || { start: '#6b4172', end: '#5b346c' };
+
             ctx.beginPath(); ctx.arc(2, 4, faceRadius, 0, Math.PI * 2);
             ctx.fillStyle = 'rgba(0,0,0,0.1)'; ctx.fill();
 
             ctx.beginPath(); ctx.arc(0, 0, faceRadius, 0, Math.PI * 2);
             const grad = ctx.createRadialGradient(-10, -10, 10, 0, 0, faceRadius);
-            grad.addColorStop(0, '#6b4172');
-            grad.addColorStop(1, '#5b346c');
+            grad.addColorStop(0, faceColor.start);
+            grad.addColorStop(1, faceColor.end);
             ctx.fillStyle = grad; ctx.fill();
 
             if (mood === 'happy') {
@@ -125,7 +133,8 @@ export default function AvatarCanvas({
 
                 const px = speaking ? ex : ex + Math.max(-7, Math.min(7, eyeOffset.x * 6));
                 const py = EYE_Y + (speaking ? 0 : Math.max(-5, Math.min(5, eyeOffset.y * 4)));
-                const pupilRadius = mood === 'sad' ? 7 : 5;
+                const isLargePupil = mood === 'sad' || mood === 'excited';
+                const pupilRadius = isLargePupil ? 7 : 5;
                 const highlightOffset = mood === 'sad' ? 3 : 2;
                 const highlightSize = mood === 'sad' ? 3 : 2;
 

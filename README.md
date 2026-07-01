@@ -14,25 +14,29 @@ STT/TTS: **Web Speech API** del navegador.
 Descarga e instala Ollama en tu PC (versión actual: **0.30.11**)  
 Página oficial: https://ollama.com
 
-### 2. Iniciar Ollama  
-Antes de arrancar el backend, ejecuta:
-```text
-ollama serve
-```
-### 3. Descargar el modelo (solo la primera vez)
+### 2. Descargar el modelo (solo la primera vez)
+(para ver los modelos que tengáis descargados ya: ollama list)
 ```text
 ollama pull llama3.2:3b
 ```
 
-### 4. Arrancar el backend
+### 3. Iniciar Ollama  
+Antes de arrancar el backend, ejecuta:
+```text
+ollama serve
+```
+
+### 4. Arrancar el backend (tenéis que instalar las dependencias la primera vez: npm install)
 ```text
 cd backend
+npm install
 npm run dev
 ```
 
-### 5. Arrancar el frontend
+### 5. Arrancar el frontend  (tenéis que instalar las dependencias la primera vez: npm install)
 ```text
 cd frontend
+npm install
 npm run dev
 ```
 (http://localhost:5173)

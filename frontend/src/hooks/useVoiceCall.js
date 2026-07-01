@@ -27,7 +27,7 @@ function isEcho(transcript, botReply, threshold = 0.6) {
     return matches / tWords.size >= threshold;
 }
 
-// hook SOLO se encarga del micrófono. No hace fetch ni TTS:
+// hook solo se encarga del micrófono. No hace fetch ni TTS:
 // eso ya lo maneja App.jsx + el efecto speak() de AreaInput.jsx.
 export function useVoiceCall({ onUserMessage, isSpeaking, lastBotMessage }) {
     const [active, setActive] = useState(false);

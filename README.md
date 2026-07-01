@@ -1,4 +1,5 @@
-# Compa‑IA
+# Compa‑IA <img width="301" height="202" alt="image" src="https://github.com/user-attachments/assets/93546457-2f92-4775-ba94-4dd2dae7ed2b" />
+
 Aplicación local creada con **React + Vite** y **Node.js**, usando **SQLite** como base de datos para la memoria.  
 Motor de inferencia: **Ollama (llama3.2:3b)**  
 STT/TTS: **Web Speech API** del navegador.

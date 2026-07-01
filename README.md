@@ -13,24 +13,30 @@ Página oficial: https://ollama.com
 
 ### 2. Iniciar Ollama  
 Antes de arrancar el backend, ejecuta:
+```text
 ollama serve
-
+```
 ### 3. Descargar el modelo (solo la primera vez)
+```text
 ollama pull llama3.2:3b
+```
 
 ### 4. Arrancar el backend
+```text
 cd backend
 npm run dev
+```
 
 ### 5. Arrancar el frontend
+```text
 cd frontend
 npm run dev
-
-(http://localhost:5173)
+```
+|---> (http://localhost:5173)
 
 ---
 
-## Notas
+## <span style="color:red">Notas</span>
 
 - El comportamiento base de la IA está definido en un **prompt del sistema**. Puedes modificarlo en:  
   `/backend/prompts/system.js`

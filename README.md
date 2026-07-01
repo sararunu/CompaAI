@@ -20,7 +20,7 @@ Página oficial: https://ollama.com
 ollama pull llama3.2:3b
 ```
 
-### 3. Iniciar Ollama  
+### 3. Iniciar Ollama 🦙
 Antes de arrancar el backend, ejecuta:
 ```text
 ollama serve

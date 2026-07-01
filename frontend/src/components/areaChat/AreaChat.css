@@ -1,0 +1,46 @@
+.chat-area {
+  flex: 1;
+  overflow-y: auto;
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.msg {
+  display: flex;
+  animation: fadeIn 0.2s ease;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(4px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.msg.user {
+  justify-content: flex-end;
+}
+
+.msg.assistant {
+  justify-content: flex-start;
+}
+
+.burbuja {
+  max-width: 80%;
+  padding: 0.75rem 1rem;
+  border-radius: 1rem;
+  line-height: 1.4;
+  word-wrap: break-word;
+}
+
+.msg.user .burbuja {
+  background: #8076dcb7;
+  color: rgb(0, 0, 0);
+  border-bottom-right-radius: 0.25rem;
+}
+
+.msg.assistant .burbuja {
+  background: #f1f1f1d5;
+  color: #000000;
+  border-bottom-left-radius: 0.25rem;
+}

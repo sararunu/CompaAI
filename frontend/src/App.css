@@ -1,0 +1,121 @@
+.app-background {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  display: flex;
+}
+
+.app-background {
+  position: absolute;
+  display: flex;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+}
+
+.app-background>div {
+  max-width: 100%;
+  height: 100%;
+}
+
+.app-content {
+  position: relative;
+  z-index: 1;
+  max-width: 600px;
+  margin: 0 auto;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  font-family: system-ui, sans-serif;
+}
+
+header {
+  padding: 1rem;
+  text-align: center;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+  background: rgba(0, 0, 0, 0.1);
+  backdrop-filter: blur(8px);
+}
+
+header h1 {
+  margin: 0;
+  font-size: 1.5rem;
+  color: #fff;
+  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+}
+
+/* AreaInput.css */
+.input-area button[type="button"] {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: #f0f0f0;
+  border: none;
+  font-size: 1.2rem;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.input-area button[type="button"]:hover:not(:disabled) {
+  background: #e0e0e0;
+}
+
+.input-area button.listening {
+  background: #ff4444;
+  color: white;
+  animation: pulse 1s infinite;
+}
+
+/* Chat area wrapper */
+.chat-area-wrapper {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  overflow-y: auto;
+}
+
+/* Avatar centrado en el medio cuando NO hay mensajes */
+.chat-area-wrapper:not(:has(.chat-area .msg)) .avatar-centered {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 100%;
+  pointer-events: none;
+  z-index: 10;
+}
+
+.chat-area-wrapper:not(:has(.chat-area .msg)) .avatar-centered canvas {
+  pointer-events: auto;
+}
+
+/* Cuando HAY mensajes, avatar arriba normal */
+.chat-area-wrapper:has(.chat-area .msg) .avatar-centered {
+  position: static;
+  transform: none;
+  margin-bottom: 1rem;
+}
+
+/* Avatar container normal */
+.avatar-centered {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.avatar-centered canvas {
+  pointer-events: auto;
+}
+
+/* Chat area */
+.chat-area {
+  flex: 1;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  padding: 1rem;
+}
+

@@ -2,8 +2,8 @@
 
 <img width="200" height="auto" alt="compa" src="https://github.com/user-attachments/assets/93546457-2f92-4775-ba94-4dd2dae7ed2b" />
 
-Aplicación local creada con **React + Vite** y **Node.js**, usando **SQLite** como base de datos para la memoria.  
-Motor de inferencia: **Ollama (llama3.2:3b)**.
+Aplicación local creada con **React + Vite** y **Node.js**, usando **SQLite** como base de datos para la memoria.<br>
+Motor de inferencia: **Ollama (llama3.2:3b)** ---> Ollama es programa para ejecutar modelos de ia localmente ☝️🤓<br>
 STT/TTS: **Web Speech API** del navegador.
 
 ---

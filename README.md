@@ -11,13 +11,13 @@ STT/TTS: **Web Speech API** del navegador.
 ## Instrucciones para probarlo... :)
 
 ### 1. Tener instalado Node.js
-<img width="307" height="120" alt="image" src="https://github.com/user-attachments/assets/d5b7e890-6a12-4279-a20e-cf32ef0331ad" /><br>
-Descarga e instala Node.js en tu pc (mi versión actual: **v22.20.0**)
+<img width="100" height="auto" alt="image" src="https://github.com/user-attachments/assets/d5b7e890-6a12-4279-a20e-cf32ef0331ad" /><br>
+Descarga e instala Node.js en tu pc (mi versión actual: **v22.20.0**)<br>
 Página oficial: https://nodejs.org/es/download (por comandos o descargar el .msi)
 
 ### 2. Instalar Ollama 
 <img width="70" height="auto" alt="image" src="https://github.com/user-attachments/assets/7928512e-ede1-4031-82a7-323d91e8212a" /><br>
-Descarga e instala Ollama en tu pc (mi versión actual: **0.30.11**)  
+Descarga e instala Ollama en tu pc (mi versión actual: **0.30.11**)<br>
 Página oficial: https://ollama.com
 
 ### 3. Descargar el modelo (solo la primera vez)

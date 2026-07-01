@@ -28,14 +28,14 @@ ollama serve
 
 ### 4. Arrancar el backend (tenéis que instalar las dependencias la primera vez: npm install)
 ```text
-cd backend
+cd ./CompaAI-main/backend
 npm install
 npm run dev
 ```
 
 ### 5. Arrancar el frontend  (tenéis que instalar las dependencias la primera vez: npm install)
 ```text
-cd frontend
+cd ./CompaAI-main/frontend
 npm install
 npm run dev
 ```

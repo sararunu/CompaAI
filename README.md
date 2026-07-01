@@ -1,4 +1,4 @@
-# Compa‑IA
+# CompaAI
 
 <img width="200" height="auto" alt="compa" src="https://github.com/user-attachments/assets/93546457-2f92-4775-ba94-4dd2dae7ed2b" />
 
@@ -8,7 +8,7 @@ STT/TTS: **Web Speech API** del navegador.
 
 ---
 
-## Instrucciones para probarlo
+## Instrucciones para probarlo... :)
 
 ### 1. Instalar Ollama  
 Descarga e instala Ollama en tu PC (versión actual: **0.30.11**)  

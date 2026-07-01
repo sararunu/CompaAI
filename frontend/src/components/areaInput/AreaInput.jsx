@@ -80,7 +80,7 @@ function AreaInput({ onSend, disabled, lastBotMessage, speaking, onSpeakingChang
         {btnIcon}
       </button>
       <button type="button" onClick={toggleCall} disabled={disabled} className={`voice-btn call-btn ${callActive ? 'active' : ''}`} aria-label={callActive ? 'Colgar llamada' : 'Iniciar llamada'}>
-        {callActive ? <i className="fa-solid fa-phone-slash" style={{ color: '#ffffff' }} /> : <i className="fa-solid fa-phone"></i>}
+        {callActive ? <i className="fa-solid fa-phone-slash" /> : <i className="fa-solid fa-phone"/>}
       </button>
     </form>
   );

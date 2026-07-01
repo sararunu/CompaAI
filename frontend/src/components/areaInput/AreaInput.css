@@ -117,25 +117,23 @@
   100% { opacity: 1; transform: translate(-50%, -50%) scale(1); }
 }
 
-.call-btn {
-  background-color: #ffffff;
+.input-area .call-btn {
+  background-color: #ff4444;
+  color: rgb(31, 30, 30);
 }
 
-.call-btn:hover {
-  background-color: #e63939;
-}
 
-.call-btn.active {
-  background-color: #6b6b6b;
+.input-area .call-btn.active:not(:disabled) {
+  background-color: #9f2020;
+  color: white;
 }
 
 .clear-btn {
-  color: white !important;
-  background: rgb(190, 35, 35) !important;
-  border: 1px solid rgb(245, 244, 244) !important;
+  color: white!important;
+  background: rgba(218, 8, 8, 0.72)!important;
 }
 
 .clear-btn:disabled {
-  background: #5e5c5c;
+  background: #212020;
   color: white;
 }

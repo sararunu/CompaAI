@@ -18,10 +18,10 @@ export async function enviarMensaje(mensaje, historial) {
             throw new Error("El backend no devolvió 'reply'");
         }
 
-        return data.reply;
+        return { reply: data.reply, mood: data.mood };
     } catch (error) {
         console.error("Error enviando mensaje:", error);
-        return null;
+        return { reply: null, mood: 'neutral' };
     }
 }
 
@@ -31,4 +31,3 @@ export async function clearHistory() {
   });
   return res.json();
 }
-

@@ -1,5 +1,4 @@
-<img width="100" height="auto" alt="compa" src="https://github.com/user-attachments/assets/93546457-2f92-4775-ba94-4dd2dae7ed2b" />
-
+<img width="200" height="auto" alt="compa" src="https://github.com/user-attachments/assets/93546457-2f92-4775-ba94-4dd2dae7ed2b" />
 # Compa‑IA
 
 Aplicación local creada con **React + Vite** y **Node.js**, usando **SQLite** como base de datos para la memoria.  

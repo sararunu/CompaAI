@@ -39,7 +39,7 @@ npm run dev
 
 ---
 
-<span style="color:red">Notas</span>
+<h2>Notas</h2>
 
 - El comportamiento base de la IA está definido en un **prompt del sistema**. Puedes modificarlo en:  
   `/backend/prompts/system.js`

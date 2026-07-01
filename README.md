@@ -10,7 +10,8 @@ STT/TTS: **Web Speech API** del navegador.
 
 ## Instrucciones para probarlo... :)
 
-### 1. Instalar Ollama  
+### 1. Instalar Ollama 
+<img width="70" height="auto" alt="image" src="https://github.com/user-attachments/assets/7928512e-ede1-4031-82a7-323d91e8212a" /><br>
 Descarga e instala Ollama en tu PC (versión actual: **0.30.11**)  
 Página oficial: https://ollama.com
 
@@ -20,7 +21,7 @@ Página oficial: https://ollama.com
 ollama pull llama3.2:3b
 ```
 
-### 3. Iniciar Ollama 🦙
+### 3. Iniciar Ollama 
 Antes de arrancar el backend, ejecuta:
 ```text
 ollama serve

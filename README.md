@@ -10,31 +10,36 @@ STT/TTS: **Web Speech API** del navegador.
 
 ## Instrucciones para probarlo... :)
 
-### 1. Instalar Ollama 
+### 1. Tener instalado Node.js
+<img width="307" height="120" alt="image" src="https://github.com/user-attachments/assets/d5b7e890-6a12-4279-a20e-cf32ef0331ad" /><br>
+Descarga e instala Node.js en tu pc (mi versión actual: **v22.20.0**)
+Página oficial: https://nodejs.org/es/download (por comandos o descargar el .msi)
+
+### 2. Instalar Ollama 
 <img width="70" height="auto" alt="image" src="https://github.com/user-attachments/assets/7928512e-ede1-4031-82a7-323d91e8212a" /><br>
-Descarga e instala Ollama en tu PC (versión actual: **0.30.11**)  
+Descarga e instala Ollama en tu pc (mi versión actual: **0.30.11**)  
 Página oficial: https://ollama.com
 
-### 2. Descargar el modelo (solo la primera vez)
+### 3. Descargar el modelo (solo la primera vez)
 (para ver los modelos que tengáis descargados ya: ollama list)
 ```text
 ollama pull llama3.2:3b
 ```
 
-### 3. Iniciar Ollama 
+### 4. Iniciar Ollama 
 Antes de arrancar el backend, ejecuta:
 ```text
 ollama serve
 ```
 
-### 4. Arrancar el backend (tenéis que instalar las dependencias la primera vez: npm install)
+### 5. Arrancar el backend (tenéis que instalar las dependencias la primera vez: npm install)
 ```text
 cd ./CompaAI-main/backend
 npm install
 npm run dev
 ```
 
-### 5. Arrancar el frontend  (tenéis que instalar las dependencias la primera vez: npm install)
+### 6. Arrancar el frontend  (tenéis que instalar las dependencias la primera vez: npm install)
 ```text
 cd ./CompaAI-main/frontend
 npm install

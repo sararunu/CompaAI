@@ -32,7 +32,7 @@ npm run dev
 cd frontend
 npm run dev
 ```
-|---> (http://localhost:5173)
+(http://localhost:5173)
 
 ---
 
